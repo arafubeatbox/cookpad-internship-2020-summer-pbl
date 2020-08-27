@@ -1,0 +1,15 @@
+<div class="card" style="max-width: 540px;">
+  <div class="card-body">
+    <h5 class="card-title"><%= kondate.name %></h5>
+    <p class="card-text">
+      レシピ一覧
+      <ul>
+        <% kondate.recipes.each do |recipe| %>
+          <li>
+            <%= recipe.name %>
+          </li>
+        <% end %>
+      </ul>
+    </p>
+  </div>
+</div>

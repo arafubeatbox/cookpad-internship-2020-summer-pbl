@@ -2,6 +2,11 @@ class DayKondatesController < ApplicationController
   before_action :set_day_kondate, only: %i[edit]
 
   def edit
+    @recipes = Recipe.all
+    @kondates = Kondate.all
+  end
+
+  def update
   end
 
   private

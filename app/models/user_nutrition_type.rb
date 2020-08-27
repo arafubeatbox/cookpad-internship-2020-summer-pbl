@@ -19,4 +19,6 @@
 #  fk_rails_...  (user_id => users.id) ON DELETE => cascade
 #
 class UserNutritionType < ApplicationRecord
+  belongs_to :user
+  belongs_to :nutrition_type
 end

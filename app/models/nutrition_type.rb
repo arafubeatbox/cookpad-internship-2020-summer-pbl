@@ -12,4 +12,6 @@
 #  updated_at   :datetime         not null
 #
 class NutritionType < ApplicationRecord
+  has_many :user_nutrition_types, dependent: :restrict_with_error
+  has_many :users, through: :user_nutrition_types
 end

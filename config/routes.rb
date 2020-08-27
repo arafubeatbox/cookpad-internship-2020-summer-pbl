@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :home
   resources :week_data
   resources :day_kondates
+  resources :kondates
 end

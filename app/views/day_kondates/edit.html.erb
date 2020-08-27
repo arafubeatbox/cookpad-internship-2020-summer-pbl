@@ -24,38 +24,35 @@
       <% else %>
         <td colspan="4" class="text-muted text-center">未登録</td>
       <% end %>
-      <%# <tr>
-        <th scope="row">目玉焼き</th>
-        <td>1000kcal</td>
-        <td>10 g</td>
-        <td>20 g</td>
-        <td>30 g</td>
-      </tr>
-      <tr>
-        <th scope="row">トースト</th>
-        <td>1000kcal</td>
-        <td>20 g</td>
-        <td>30 g</td>
-        <td>40 g</td>
-      </tr>
-      <tr>
-        <th scope="row">コーンスープ</th>
-        <td>1000kcal</td>
-        <td>40 g</td>
-        <td>30 g</td>
-        <td>10 g</td>
-      </tr>
-      <tr>
-        <th scope="row">合計</th>
-        <td>3000kcal</td>
-        <td>70 g</td>
-        <td>80 g</td>
-        <td>80 g</td>
-      </tr> %>
     </tbody>
   </table>
 </div>
-<div>
-  <%= link_to "追加", new_home_path, class: "btn btn-primary" %>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>あなたにオススメの献立一覧</h2>
+      <div class="d-flex justify-content-center mt-5">
+        <div>
+          <% @kondates.each do |kondate| %>
+              <%= render 'kondates/kondate_card', { kondate: kondate }%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <h2>あなたにオススメのレシピ一覧</h2>
+      <div class="d-flex justify-content-center mt-5">
+        <div>
+          <% @recipes.each do |recipe| %>
+              <%= render 'recipes/recipe_card', { recipe: recipe }%>
+          <% end %>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<%= link_to "追加", new_home_path, class: "btn btn-primary" %>

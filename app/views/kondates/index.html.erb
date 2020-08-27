@@ -1,0 +1,7 @@
+<div class="d-flex justify-content-center mt-5">
+  <div>
+    <% @kondates.each do |kondate| %>
+        <%= render 'kondate_card', { kondate: kondate }%>
+    <% end %>
+  </div>
+</div>
