@@ -22,4 +22,12 @@ class Recipe < ApplicationRecord
   has_many :ingredients, through: :recipe_ingredients
 
   belongs_to :user
+
+  def calculate_total(attribute)
+    total = 0
+    recipe_ingredients.each do |ri|
+      total += ri.ingredient.send(attribute) * ri.ingredient_amount / 100
+    end
+    total
+  end
 end

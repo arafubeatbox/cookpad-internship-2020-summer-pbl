@@ -7,6 +7,6 @@ class WeekDataController < ApplicationController
   private
 
   def set_week_data
-    @week_data = WeekData.find(params[:id])
+    @week_datum = WeekDatum.find(params[:id])
   end
 end

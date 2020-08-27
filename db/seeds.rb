@@ -9,6 +9,8 @@
   User.create_or_find_by(name: "User#{i}", password: 'password', password_confirmation: 'password', email: "user#{i}@gmail.com")
 end
 
+user1 = User.find_by(name: 'User1')
+
 onion = Ingredient.find_or_create_by(name: '玉ねぎ', kcal: 39, fat: 0.1, protein: 1.1, carbohydrate: 9)
 raddish = Ingredient.find_or_create_by(name: '大根', kcal: 18, fat: 0.1, protein: 0.6, carbohydrate: 4.1)
 brocoli_sprout = Ingredient.find_or_create_by(name: 'ブロッコリースプラウト', kcal: 19, fat: 0.6, protein: 1.9, carbohydrate: 2.6)
@@ -70,3 +72,44 @@ RecipeIngredient.find_or_create_by(recipe_id: ume_rice.id, ingredient_id: soy_sa
 RecipeIngredient.find_or_create_by(recipe_id: ume_rice.id, ingredient_id: mirin.id, ingredient_amount: 3)
 RecipeIngredient.find_or_create_by(recipe_id: ume_rice.id, ingredient_id: sake.id, ingredient_amount: 3)
 
+kondate_test = Kondate.find_or_create_by(name: '適当')
+KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: onion_raddish_salad.id)
+KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: tomato_soup.id)
+KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: ume_rice.id)
+
+week_datum1 = WeekDatum.find_or_create_by(user_id: user1.id, week: '8/23 ~ 29')
+day_datum1 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/23')
+day_datum2 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/24')
+day_datum3 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/25')
+day_datum4 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/26')
+day_datum5 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/27')
+day_datum6 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/28')
+day_datum7 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/29')
+
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 0, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 1, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 2, kondate_id: kondate_test.id)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 0, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 1, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 2, kondate_id: kondate_test.id)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 0, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 1, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 2, kondate_id: kondate_test.id)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 0, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 1, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 2, kondate_id: kondate_test.id)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum5.id, period: 0)
+DayKondate.find_or_create_by(day_datum_id: day_datum5.id, period: 1)
+DayKondate.find_or_create_by(day_datum_id: day_datum5.id, period: 2)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum6.id, period: 0)
+DayKondate.find_or_create_by(day_datum_id: day_datum6.id, period: 1)
+DayKondate.find_or_create_by(day_datum_id: day_datum6.id, period: 2)
+
+DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 0)
+DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 1)
+DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 2)

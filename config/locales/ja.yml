@@ -1,0 +1,11 @@
+---
+ja:
+  activerecord:
+    models:
+    attributes:
+  enums:
+    day_kondate:
+      period:
+        breakfast: 朝食
+        lunch: 昼食
+        dinner: 晩ご飯

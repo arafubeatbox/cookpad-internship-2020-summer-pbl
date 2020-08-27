@@ -19,17 +19,18 @@ ActiveRecord::Schema.define(version: 2020_08_27_025915) do
     t.string "date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "week_data_id"
-    t.index ["week_data_id"], name: "index_day_data_on_week_data_id"
+    t.bigint "week_datum_id"
+    t.index ["week_datum_id"], name: "index_day_data_on_week_datum_id"
   end
 
-  create_table "day_recipes", force: :cascade do |t|
-    t.bigint "day_data_id", null: false
-    t.bigint "recipe_id", null: false
+  create_table "day_kondates", force: :cascade do |t|
+    t.bigint "day_datum_id", null: false
+    t.bigint "kondate_id"
+    t.integer "period", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["day_data_id"], name: "index_day_recipes_on_day_data_id"
-    t.index ["recipe_id"], name: "index_day_recipes_on_recipe_id"
+    t.index ["day_datum_id"], name: "index_day_kondates_on_day_datum_id"
+    t.index ["kondate_id"], name: "index_day_kondates_on_kondate_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -38,6 +39,21 @@ ActiveRecord::Schema.define(version: 2020_08_27_025915) do
     t.float "protein", null: false
     t.float "carbohydrate", null: false
     t.float "fat", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "kondate_recipes", force: :cascade do |t|
+    t.bigint "kondate_id", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["kondate_id"], name: "index_kondate_recipes_on_kondate_id"
+    t.index ["recipe_id"], name: "index_kondate_recipes_on_recipe_id"
+  end
+
+  create_table "kondates", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -101,9 +117,11 @@ ActiveRecord::Schema.define(version: 2020_08_27_025915) do
     t.index ["user_id"], name: "index_week_data_on_user_id"
   end
 
-  add_foreign_key "day_data", "week_data", column: "week_data_id", on_delete: :cascade
-  add_foreign_key "day_recipes", "day_data", column: "day_data_id", on_delete: :cascade
-  add_foreign_key "day_recipes", "recipes", on_delete: :restrict
+  add_foreign_key "day_data", "week_data", on_delete: :cascade
+  add_foreign_key "day_kondates", "day_data", on_delete: :cascade
+  add_foreign_key "day_kondates", "kondates", on_delete: :restrict
+  add_foreign_key "kondate_recipes", "kondates", on_delete: :cascade
+  add_foreign_key "kondate_recipes", "recipes", on_delete: :restrict
   add_foreign_key "recipe_ingredients", "ingredients", on_delete: :cascade
   add_foreign_key "recipe_ingredients", "recipes", on_delete: :cascade
   add_foreign_key "recipes", "users", on_delete: :cascade
