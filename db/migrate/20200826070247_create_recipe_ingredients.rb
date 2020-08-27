@@ -3,6 +3,7 @@ class CreateRecipeIngredients < ActiveRecord::Migration[6.0]
     create_table :recipe_ingredients do |t|
       t.references :ingredient, foreign_key: { on_delete: :cascade }, null: false
       t.references :recipe, foreign_key: { on_delete: :cascade }, null: false
+      t.float :ingredient_amount, null: false
       t.timestamps
     end
   end

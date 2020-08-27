@@ -2,11 +2,12 @@
 #
 # Table name: recipe_ingredients
 #
-#  id            :bigint           not null, primary key
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  ingredient_id :bigint           not null
-#  recipe_id     :bigint           not null
+#  id                :bigint           not null, primary key
+#  ingredient_amount :float            not null
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  ingredient_id     :bigint           not null
+#  recipe_id         :bigint           not null
 #
 # Indexes
 #
@@ -19,4 +20,6 @@
 #  fk_rails_...  (recipe_id => recipes.id) ON DELETE => cascade
 #
 class RecipeIngredient < ApplicationRecord
+  belongs_to :recipe
+  belongs_to :ingredient
 end

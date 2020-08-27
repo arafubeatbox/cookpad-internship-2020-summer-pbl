@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_072346) do
+ActiveRecord::Schema.define(version: 2020_08_27_025915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,22 +34,20 @@ ActiveRecord::Schema.define(version: 2020_08_26_072346) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "kcal", null: false
-    t.integer "protein", null: false
-    t.integer "carbohydrate", null: false
-    t.integer "fats", null: false
-    t.integer "sugar", null: false
+    t.float "kcal", null: false
+    t.float "protein", null: false
+    t.float "carbohydrate", null: false
+    t.float "fat", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "nutrition_types", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "kcal", null: false
-    t.integer "protein", null: false
-    t.integer "carbohydrate", null: false
-    t.integer "fats", null: false
-    t.integer "sugar", null: false
+    t.float "kcal", null: false
+    t.float "protein", null: false
+    t.float "carbohydrate", null: false
+    t.float "fat", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -57,6 +55,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_072346) do
   create_table "recipe_ingredients", force: :cascade do |t|
     t.bigint "ingredient_id", null: false
     t.bigint "recipe_id", null: false
+    t.float "ingredient_amount", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["ingredient_id"], name: "index_recipe_ingredients_on_ingredient_id"
@@ -67,6 +66,9 @@ ActiveRecord::Schema.define(version: 2020_08_26_072346) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "description"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
   create_table "user_nutrition_types", force: :cascade do |t|
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_072346) do
   add_foreign_key "day_recipes", "recipes", on_delete: :restrict
   add_foreign_key "recipe_ingredients", "ingredients", on_delete: :cascade
   add_foreign_key "recipe_ingredients", "recipes", on_delete: :cascade
+  add_foreign_key "recipes", "users", on_delete: :cascade
   add_foreign_key "user_nutrition_types", "nutrition_types", on_delete: :restrict
   add_foreign_key "user_nutrition_types", "users", on_delete: :cascade
   add_foreign_key "week_data", "users", on_delete: :cascade
