@@ -1,32 +1,37 @@
 <h1><%= @day_kondate.day_datum.date %> の<%= @day_kondate.period_i18n %></h1>
 
-<div class="d-flex justify-content-center mt-5">
-  <table class="table w-75">
-    <thead>
-      <tr>
-        <th scope="col">kcal</th>
-        <th scope="col">炭水化物</th>
-        <th scope="col">タンパク質</th>
-        <th scope="col">脂質</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% if @day_kondate.kondate %>
-        <% @day_kondate.kondate.recipes.each do |recipe| %>
-          <tr>
-            <th scope="row"><%= recipe.name %></th>
-            <td><%= recipe.calculate_total(:kcal) %> kcal</td>
-            <td><%= recipe.calculate_total(:carbohydrate) %> g</td>
-            <td><%= recipe.calculate_total(:protein) %> g</td>
-            <td><%= recipe.calculate_total(:fat) %> g</td>
-          </tr>
+<%= form_with model: @day_kondate, local: true do |f| %>
+  <div class="d-flex justify-content-center mt-5">
+    <table class="table w-75">
+      <thead>
+        <tr>
+          <th scope="col">レシピ名</th>
+          <th scope="col">kcal</th>
+          <th scope="col">炭水化物</th>
+          <th scope="col">タンパク質</th>
+          <th scope="col">脂質</th>
+        </tr>
+      </thead>
+      <tbody id="kondate-table">
+        <% if @day_kondate.kondate %>
+          <% @day_kondate.kondate.recipes.each do |recipe| %>
+            <tr>
+              <th scope="row"><%= recipe.name %></th>
+              <td><%= recipe.calculate_total(:kcal) %> kcal</td>
+              <td><%= recipe.calculate_total(:carbohydrate) %> g</td>
+              <td><%= recipe.calculate_total(:protein) %> g</td>
+              <td><%= recipe.calculate_total(:fat) %> g</td>
+              <%= f.hidden_field 'recipe_ids[]', recipe.id %>
+            </tr>
+          <% end %>
+        <% else %>
+          <td colspan="4" class="text-muted text-center" id="unregistered-message">未登録</td>
         <% end %>
-      <% else %>
-        <td colspan="4" class="text-muted text-center">未登録</td>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
+  <%= f.submit "登録", class: "btn btn-primary d-block" %>
+<% end %>
 
 <div class="container">
   <div class="row">
@@ -45,7 +50,7 @@
       <div class="d-flex justify-content-center mt-5">
         <div>
           <% @recipes.sample(5).each do |recipe| %>
-              <%= render 'recipes/recipe_card', { recipe: recipe }%>
+              <%= render 'recipes/recipe_card', { recipe: recipe, edit: true }%>
           <% end %>
         </div>
       </div>
@@ -54,5 +59,3 @@
     </div>
   </div>
 </div>
-
-<%= link_to "追加", new_home_path, class: "btn btn-primary" %>

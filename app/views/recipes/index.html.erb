@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center mt-5">
   <div>
     <% @recipes.each do |recipe| %>
-        <%= render 'recipe_card', { recipe: recipe }%>
+        <%= render 'recipe_card', { recipe: recipe, edit: false }%>
     <% end %>
   </div>
 </div>

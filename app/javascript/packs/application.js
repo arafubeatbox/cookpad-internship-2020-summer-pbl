@@ -6,6 +6,7 @@
 require("@rails/ujs").start()
 require("@rails/activestorage").start()
 require("channels")
+require("jquery")
 import "bootstrap"
 
 
@@ -15,3 +16,26 @@ import "bootstrap"
 //
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
+
+$(function() {
+  $('.day-kondate-recipe-add-btn').on('click', function() {
+    const id = $(this).data('id');
+    const name = $(this).data('name');
+    var kcal = Math.round(parseInt($(this).data('kcal')));
+    var protein = Math.round(parseInt($(this).data('protein')));
+    var carbo = Math.round(parseInt($(this).data('carbo')));
+    var fat = Math.round(parseInt($(this).data('fat')));
+
+    var html = `<tr>
+                  <th scope="row">${name}</th>
+                  <td>${kcal} kcal</td>
+                  <td>${carbo} g</td>
+                  <td>${protein} g</td>
+                  <td>${fat} g</td>
+                  <input type="hidden" value="${id}" name="recipe_ids[]">
+                </tr>`
+
+    $('#unregistered-message').remove();
+    $('#kondate-table').append(html);
+  });
+});

@@ -18,7 +18,7 @@
         <tr>
           <th><%= day_datum.date %></th>
         </tr>
-        <% day_datum.day_kondates.each do |day_kondate| %>
+        <% day_datum.day_kondates.order(:period).each do |day_kondate| %>
           <tr>
             <th scope="row"><%= day_kondate.period_i18n %></th>
             <% if day_kondate.kondate %>
