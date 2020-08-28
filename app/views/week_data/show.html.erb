@@ -1,4 +1,4 @@
-<h1><%= @week_datum.week %></h1>
+<h2 class="ml-5 pt-3"><%= @week_datum.week %>の週(<%= current_user.nutrition_type.name %>型)</h2>
 
 <div class="d-flex justify-content-center mt-5">
   <table class="table w-75">
@@ -15,8 +15,9 @@
 
     <% @week_datum.day_data.each do |day_datum| %>
       <tbody>
-        <tr>
+        <tr class="table-primary">
           <th><%= day_datum.date %></th>
+          <td colspan="5">
         </tr>
         <% day_datum.day_kondates.order(:period).each do |day_kondate| %>
           <tr>
@@ -37,15 +38,22 @@
               <td><%= day_kondate.kondate.calculate_total(:fat) %> g</td>
             <% else %>
               <td colspan="4" class="text-muted text-center">未登録</td>
-              <td><%= link_to "登録", edit_day_kondate_path(day_kondate), class: "btn btn-primary" %></td>
+              <td><%= link_to "登録", edit_day_kondate_path(day_kondate), class: "btn btn-outline-success" %></td>
             <% end %>
           </tr>
         <% end %>
+        <tr>
+          <th colspan="2" scope="row">合計</th>
+          <td class="table-<%= compare_to_standard(day_datum.calculate_total(:kcal), current_user.nutrition_type.kcal) %>"><%= day_datum.calculate_total(:kcal) %> kcal</td>
+          <td class="table-<%= compare_to_standard(day_datum.calculate_total(:carbohydrate), current_user.nutrition_type.carbohydrate) %>"><%= day_datum.calculate_total(:carbohydrate) %> g</td>
+          <td class="table-<%= compare_to_standard(day_datum.calculate_total(:protein), current_user.nutrition_type.protein) %>"><%= day_datum.calculate_total(:protein) %> g</td>
+          <td class="table-<%= compare_to_standard(day_datum.calculate_total(:fat), current_user.nutrition_type.fat) %>"><%= day_datum.calculate_total(:fat) %> g</td>
+        </tr>
       </tbody>
     <% end %>
 
     <tbody>
-      <tr>
+      <tr class="table-info">
         <th colspan="2" scope="row">週の合計</th>
         <td><%= @week_datum.calculate_total(:kcal) %> kcal</td>
         <td><%= @week_datum.calculate_total(:carbohydrate) %> g</td>

@@ -1,4 +1,4 @@
-<h1><%= @day_kondate.day_datum.date %> の<%= @day_kondate.period_i18n %></h1>
+<h2 class="ml-5 pt-3"><%= @day_kondate.day_datum.date %> の<%= @day_kondate.period_i18n %></h2>
 
 <%= form_with model: @day_kondate, local: true do |f| %>
   <div class="d-flex justify-content-center mt-5">
@@ -23,20 +23,38 @@
               <td><%= recipe.calculate_total(:fat) %> g</td>
               <%= f.hidden_field 'recipe_ids[]', recipe.id %>
             </tr>
+            <tr>
+              <th scope="row">合計</th>
+              <td><%= kondate.calculate_total(:kcal) %> kcal</td>
+              <td><%= kondate.calculate_total(:carbohydrate) %> g</td>
+              <td><%= kondate.calculate_total(:protein) %> g</td>
+              <td><%= kondate.calculate_total(:fat) %> g</td>
+            </tr>
           <% end %>
         <% else %>
-          <td colspan="4" class="text-muted text-center" id="unregistered-message">未登録</td>
+          <tr>
+            <td colspan="4" class="text-muted text-center" id="unregistered-message">未登録</td>
+          </tr>
+          <tr id="total-row">
+            <th scope="row">合計</th>
+            <td id="total-kcal" data-total-kcal="0" data-standard-kcal="<%= current_user.nutrition_type.kcal %>">0 kcal</td>
+            <td id="total-carbs" data-total-carbs="0" data-standard-carbs="<%= current_user.nutrition_type.carbohydrate %>">0 g</td>
+            <td id="total-protein" data-total-protein="0" data-standard-protein="<%= current_user.nutrition_type.protein %>">0 g</td>
+            <td id="total-fat" data-total-fat="0" data-standard-fat="<%= current_user.nutrition_type.fat %>">0 g</td>
+          </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <%= f.submit "登録", class: "btn btn-primary d-block" %>
+  <div class="position-relative">
+    <%= f.submit "登録", class: "btn btn-success d-block position-absolute", style: "right: 250px;" %>
+  </div>
 <% end %>
 
-<div class="container">
+<div class="container mt-5 pt-5">
   <div class="row">
     <div class="col">
-      <h2>あなたにオススメの献立一覧</h2>
+      <h3>あなたにオススメの献立一覧</h3>
       <div class="d-flex justify-content-center mt-5">
         <div>
           <% @kondates.each do |kondate| %>
@@ -46,7 +64,7 @@
       </div>
     </div>
     <div class="col">
-      <h2>あなたにオススメのレシピ一覧</h2>
+      <h3>あなたにオススメのレシピ一覧</h3>
       <div class="d-flex justify-content-center mt-5">
         <div>
           <% @recipes.sample(5).each do |recipe| %>

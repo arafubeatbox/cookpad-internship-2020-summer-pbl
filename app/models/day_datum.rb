@@ -19,4 +19,16 @@
 class DayDatum < ApplicationRecord
   belongs_to :week_datum
   has_many :day_kondates, dependent: :destroy
+
+  def calculate_total(attribute)
+    total = 0
+
+    day_kondates.each do |dk|
+      if dk.kondate
+        total += dk.kondate.calculate_total(attribute)
+      end
+    end
+
+    total.round
+  end
 end

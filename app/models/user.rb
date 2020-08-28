@@ -27,5 +27,5 @@ class User < ApplicationRecord
   has_many :week_data, dependent: :destroy
 
   has_one :user_nutrition_type, dependent: :destroy
-  has_one :nutrition_type
+  has_one :nutrition_type, through: :user_nutrition_type
 end

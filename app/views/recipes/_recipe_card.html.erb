@@ -7,6 +7,14 @@
       <div class="card-body">
         <h5 class="card-title"><%= recipe.name %></h5>
         <p class="card-text"><%= recipe.description %></p>
+        <p class="card-text"><small><%= recipe.calculate_total(:kcal).round %> kcal</small></p>
+        <p class="card-text">
+          <small>
+            炭水化物 <%= recipe.calculate_total(:carbohydrate).round %> g,
+            たんぱく質 <%= recipe.calculate_total(:protein).round %> g,
+            脂質 <%= recipe.calculate_total(:fat).round %> g
+          </small>
+        </p>
         <p class="card-text"><small class="text-muted">by <%= recipe.user.name %></small></p>
         <% if edit == true %>
           <button
@@ -17,7 +25,7 @@
             data-name="<%= recipe.name %>"
             data-kcal="<%= recipe.calculate_total(:kcal) %>"
             data-protein="<%= recipe.calculate_total(:protein) %>"
-            data-carbo="<%= recipe.calculate_total(:carbohydrate) %>"
+            data-carbs="<%= recipe.calculate_total(:carbohydrate) %>"
             data-fat="<%= recipe.calculate_total(:fat) %>"
           >+</button>
         <% end %>

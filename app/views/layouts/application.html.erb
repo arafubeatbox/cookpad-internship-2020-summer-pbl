@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CookpadInternship2020SummerPbl</title>
+    <title>Reco Meal</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -11,7 +11,7 @@
 
   <body>
     <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">サービス名</a>
+      <a class="position-absolute navbar-brand font-weight-bold m-0" href="#" style="font-family: Tahoma; font-size: 25px; left: 0px; right: 0px; text-align: center; z-index: -1;">Reco Meal</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -19,25 +19,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <% if user_signed_in? %>
-            <%# <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li> %>
             <li class="nav-item">
               <%= link_to '今週分', week_datum_path(current_user.week_data.last), class: "nav-link"%>
             </li>
-            <%# <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li> %>
             <li class="nav-item">
-              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link" %>
+              <%= link_to 'レシピ登録', '/', class: "nav-link"%>
+            </li>
+            <li class="nav-item ml-2">
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="レシピを検索" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
+              </form>
             </li>
             <%# <li class="nav-item">
               <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -46,10 +38,7 @@
           <% end %>
         </ul>
         <% if user_signed_in? %>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="レシピを検索" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">検索</button>
-          </form>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "btn btn-outline-info" %>
         <% else%>
           <%= link_to 'ログイン', new_user_session_path, class: "btn btn-outline-success mr-2"%>
           <%= link_to '新規登録', new_user_registration_path, class: "btn btn-outline-info"%>
@@ -58,6 +47,7 @@
     </nav>
 
     <div style="padding-top: 56px;">
+      <%= render 'layouts/notifications' %>
       <%= yield %>
     </div>
   </body>

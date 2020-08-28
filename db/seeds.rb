@@ -95,10 +95,10 @@ green_pepper = Ingredient.find_or_create_by(name: 'ピーマン', kcal: 20, fat:
 sausage = Ingredient.find_or_create_by(name: 'ソーセージ', kcal: 301, fat: 27, protein: 12, carbohydrate: 2)
 miso = Ingredient.find_or_create_by(name: '味噌', kcal: 199, fat: 6, protein: 12, carbohydrate: 26)
 
-nikumiso_green_pepper = Recipe.find_or_create_by(name: 'こってり肉味噌ピーマン', description: 'ピーマンが苦手な人でも美味しく食べられます♪ピーマン消費にも☆', user_id: User.find_by(name: 'User4').id, image_url: 'https://img.cpcdn.com/recipes/1974521/840x1461s/2e113d17813e0c3709892d6bfa704ab1?u=4174257&p=1348913580')
+nikumiso_green_pepper = Recipe.find_or_create_by(name: '肉味噌ピーマン', description: 'ピーマンが苦手な人でも美味しく食べられます♪ピーマン消費にも☆', user_id: User.find_by(name: 'User4').id, image_url: 'https://img.cpcdn.com/recipes/1974521/840x1461s/2e113d17813e0c3709892d6bfa704ab1?u=4174257&p=1348913580')
 
 RecipeIngredient.find_or_create_by(recipe_id: nikumiso_green_pepper.id, ingredient_id: green_pepper.id, ingredient_amount: 38)
-RecipeIngredient.find_or_create_by(recipe_id: nikumiso_green_pepper.id, ingredient_id: sausage.id, ingredient_amount: 22)
+RecipeIngredient.find_or_create_by(recipe_id: nikumiso_green_pepper.id, ingredient_id: sausage.id, ingredient_amount: 35)
 RecipeIngredient.find_or_create_by(recipe_id: nikumiso_green_pepper.id, ingredient_id: miso.id, ingredient_amount: 2.5)
 RecipeIngredient.find_or_create_by(recipe_id: nikumiso_green_pepper.id, ingredient_id: sugar.id, ingredient_amount: 3)
 
@@ -106,13 +106,13 @@ pork_belly = Ingredient.find_or_create_by(name: '豚バラ', kcal: 518, fat: 53,
 
 green_pepper_nikumaki = Recipe.find_or_create_by(name: 'ピーマンの肉巻き', description: '下茹でも粉付けもなしでとっても簡単。ピーマンが苦手な人もおいしくいただけるレシピです。', user_id: User.find_by(name: 'User4').id, image_url: 'https://img.cpcdn.com/recipes/4088334/840x1461s/3f302dec8ebd349c21e4d6e06cb2c045?u=10634079&p=1474945517')
 
-RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: pork_belly.id, ingredient_amount: 50)
+RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: pork_belly.id, ingredient_amount: 30)
 RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: green_pepper.id, ingredient_amount: 48)
 RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: sugar.id, ingredient_amount: 3.8)
 RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: soy_sauce.id, ingredient_amount: 3.8)
 RecipeIngredient.find_or_create_by(recipe_id: green_pepper_nikumaki.id, ingredient_id: mirin.id, ingredient_amount: 3.8)
 
-shitake = Ingredient.find_or_create_by(name: '椎茸', kcal: 34, fat: 0.5, protein: 2.2, carbohydrate: 7)
+shitake = Ingredient.find_or_create_by(name: 'しいたけ', kcal: 34, fat: 0.5, protein: 2.2, carbohydrate: 7)
 
 pork_belly_green_pepper = Recipe.find_or_create_by(
   name: '椎茸ピーマン豚バラの甘辛炒め',
@@ -197,10 +197,32 @@ RecipeIngredient.find_or_create_by(recipe_id: cabbage_chicken.id, ingredient_id:
 RecipeIngredient.find_or_create_by(recipe_id: cabbage_chicken.id, ingredient_id: soy_sauce.id, ingredient_amount: 7.5)
 RecipeIngredient.find_or_create_by(recipe_id: cabbage_chicken.id, ingredient_id: butter.id, ingredient_amount: 5)
 
-kondate_test = Kondate.find_or_create_by(name: '適当')
-KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: onion_raddish_salad.id)
-KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: tomato_soup.id)
-KondateRecipe.find_or_create_by(kondate_id: kondate_test.id, recipe_id: ume_rice.id)
+healthy_kondate = Kondate.find_or_create_by(name: 'ヘルシー', kondate_type: 0)
+KondateRecipe.find_or_create_by(kondate_id: healthy_kondate.id, recipe_id: onion_raddish_salad.id)
+KondateRecipe.find_or_create_by(kondate_id: healthy_kondate.id, recipe_id: tomato_soup.id)
+KondateRecipe.find_or_create_by(kondate_id: healthy_kondate.id, recipe_id: ume_rice.id)
+
+large_kondate = Kondate.find_or_create_by(name: 'ガッツリ', kondate_type: 0)
+KondateRecipe.find_or_create_by(kondate_id: large_kondate.id, recipe_id: chicken_nanban.id)
+KondateRecipe.find_or_create_by(kondate_id: large_kondate.id, recipe_id: green_pepper_nikumaki.id)
+KondateRecipe.find_or_create_by(kondate_id: large_kondate.id, recipe_id: cabbage_egg.id)
+
+veggie_kondate = Kondate.find_or_create_by(name: '野菜たっぷり', kondate_type: 0)
+KondateRecipe.find_or_create_by(kondate_id: veggie_kondate.id, recipe_id: onion_raddish_salad.id)
+KondateRecipe.find_or_create_by(kondate_id: veggie_kondate.id, recipe_id: green_pepper_nikumaki.id)
+KondateRecipe.find_or_create_by(kondate_id: veggie_kondate.id, recipe_id: cabbage_egg.id)
+
+kondate1 = Kondate.find_or_create_by(name: '野菜たっぷり1', kondate_type: 1)
+KondateRecipe.find_or_create_by(kondate_id: kondate1.id, recipe_id: cabbage_chicken.id)
+
+kondate2 = Kondate.find_or_create_by(name: '野菜たっぷり2', kondate_type: 1)
+KondateRecipe.find_or_create_by(kondate_id: kondate2.id, recipe_id: pork_belly_green_pepper.id)
+KondateRecipe.find_or_create_by(kondate_id: kondate2.id, recipe_id: onion_raddish_salad.id)
+
+kondate3 = Kondate.find_or_create_by(name: '野菜たっぷり3', kondate_type: 1)
+KondateRecipe.find_or_create_by(kondate_id: kondate3.id, recipe_id: beef_cellophane.id)
+KondateRecipe.find_or_create_by(kondate_id: kondate3.id, recipe_id: cabbage_egg.id)
+
 
 week_datum1 = WeekDatum.find_or_create_by(user_id: user1.id, week: '8/23 ~ 29')
 day_datum1 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/23')
@@ -211,21 +233,21 @@ day_datum5 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/
 day_datum6 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/28')
 day_datum7 = DayDatum.find_or_create_by(week_datum_id: week_datum1.id, date: '8/29')
 
-DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 0, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 1, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 2, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 0, kondate_id: healthy_kondate.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 1, kondate_id: kondate1.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum1.id, period: 2, kondate_id: veggie_kondate.id)
 
-DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 0, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 1, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 2, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 0, kondate_id: kondate2.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 1, kondate_id: large_kondate.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum2.id, period: 2, kondate_id: veggie_kondate.id)
 
-DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 0, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 1, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 2, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 0, kondate_id: healthy_kondate.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 1, kondate_id: kondate3.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum3.id, period: 2, kondate_id: veggie_kondate.id)
 
-DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 0, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 1, kondate_id: kondate_test.id)
-DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 2, kondate_id: kondate_test.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 0, kondate_id: kondate1.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 1, kondate_id: kondate2.id)
+DayKondate.find_or_create_by(day_datum_id: day_datum4.id, period: 2, kondate_id: kondate3.id)
 
 DayKondate.find_or_create_by(day_datum_id: day_datum5.id, period: 0)
 DayKondate.find_or_create_by(day_datum_id: day_datum5.id, period: 1)
@@ -238,3 +260,8 @@ DayKondate.find_or_create_by(day_datum_id: day_datum6.id, period: 2)
 DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 0)
 DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 1)
 DayKondate.find_or_create_by(day_datum_id: day_datum7.id, period: 2)
+
+average = NutritionType.find_or_create_by(name: "平均", kcal: 2300, protein: 65, fat: 55, carbohydrate: 325)
+# carbs_diet= NutritionType.find_or_create_by(name: "炭水化物ダイエット")
+
+UserNutritionType.find_or_create_by(user_id: user1.id, nutrition_type_id: average.id)
